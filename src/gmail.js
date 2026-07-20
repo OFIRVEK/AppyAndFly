@@ -13,6 +13,18 @@ export async function listEmails(gmail) {
   return res.data.messages || [];
 }
 
+// One-time onboarding scan of a user-named Gmail label/folder (e.g. a folder
+// they've been manually moving application emails into), before the bot
+// settles into the normal recurring Inbox-only poll.
+export async function listEmailsByFolder(gmail, folderName) {
+  const res = await gmail.users.messages.list({
+    userId: 'me',
+    q: `label:"${folderName}"`,
+    maxResults: 200
+  });
+  return res.data.messages || [];
+}
+
 export async function getEmail(gmail, id) {
   const res = await gmail.users.messages.get({
     userId: 'me',

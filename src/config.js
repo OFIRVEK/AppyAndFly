@@ -21,6 +21,7 @@ export const config = {
     token: process.env.WHATSAPP_TOKEN,
     phoneNumberId: process.env.WHATSAPP_PHONE_NUMBER_ID,
     to: process.env.WHATSAPP_TO_NUMBER,
+    verifyToken: process.env.WHATSAPP_VERIFY_TOKEN,
   },
 
   groq: {

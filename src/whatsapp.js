@@ -1,19 +1,19 @@
 import axios from "axios";
 import { config } from "./config.js";
 
-export async function sendWhatsApp(message) {
+export async function sendWhatsApp(message, to = config.whatsapp.to) {
   try {
     const url = `https://graph.facebook.com/v20.0/${config.whatsapp.phoneNumberId}/messages`;
 
     console.log(
-      `[whatsapp] sending -> phoneNumberId=${config.whatsapp.phoneNumberId} to=${config.whatsapp.to} tokenSet=${!!config.whatsapp.token}`
+      `[whatsapp] sending -> phoneNumberId=${config.whatsapp.phoneNumberId} to=${to} tokenSet=${!!config.whatsapp.token}`
     );
 
     const res = await axios.post(
       url,
       {
         messaging_product: "whatsapp",
-        to: config.whatsapp.to,   // 👈 MUST exist
+        to,
         type: "text",
         text: { body: message },
       },
